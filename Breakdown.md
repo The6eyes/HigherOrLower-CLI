@@ -61,3 +61,108 @@ We use the empty `print(" ")` to print an empty line. We can also do this by usi
 We use `string interpolation` to display the range (`minimumNumber` and `maximumNumber`) dynamically. 
 
 This ensures the player knows the rules and the range to guess in.
+
+# Game Loop: Player Guesses a Number
+
+The game keeps prompting the player to guess until they succeed or decide to stop.
+
+```swift
+  while !isGameOver {
+        print("Enter your guess here 🤔:", terminator: " " )
+        
+        if let userInput = readLine()   {
+            if let guess = Int(userInput) {
+                checkGuess(guess)
+            } else {
+                print("")
+                print("Please enter a valid number. 🥲 \n")
+            }
+        }
+    }
+```
+`readLine()` captures  the players input 
+
+`(Int(userInput))` checks if the `user input` can be converted into an `integer`. If it can be converted into an `integer` then it calls our `checkGuess(guess)` function to process the guess.
+
+If it can not convert the `user input` into an `integer` then it will ask the player to enter a valid number.
+
+# Checking the Players Guess
+
+The `checkGuess` function first checks if the users guess is in range and then determines if the players guess is too high, too low, or correct.
+
+```swift
+ func checkGuess(_ guess: Int) {
+    
+        if guess < minimumNumber || guess > maximumNumber {
+            print("")
+            print("Yikers❗️Your guess is out of range❗️ 😩")
+            print("Hint: Make sure to guess a number betweeen \(minimumNumber) and \(maximumNumber).\n")
+            return
+        }
+       
+        if guess < targetNumber {
+            print("")
+            if attempts >= 4 {
+                print(tooLowResponses.randomElement()!)
+            } else {
+                print("Too low‼️ Guess Higher❗️")
+                attempts += 1}
+        } else if guess > targetNumber {
+            print("")
+            if attempts >= 4 {
+                print(tooHighReponses.randomElement()!)
+            } else {
+                print("Too high‼️ Guess lower❗️")
+                attempts += 1}
+        } else {
+            print("")
+            print("Congratulations❗️🥳🎉 You win‼️")
+            print("You guessed in \(attempts) attempts.\n")
+            isGameOver = true
+        }
+    }
+```
+If the players guess is lower than our `minimumNumber` or higher than our `maximumNumber` then we will print a custom message notifying the player that they guessed out of range and we will also remind them of the range they are supposed to be guessing in. 
+
+If the guess is in range then we will compare it against our `targetNumber`. If the guess is too low it will display a too low message. If it is too high it will display a too high message. 
+
+If the guess is correct, it will congratulate the player and `print` how many attempts it took them to guess the correct number before ending the game.
+
+# Asking the Player if they want to Play Again
+
+After each game the program asks the player if they want to play again.
+
+```swift
+    while true {
+        print("")
+        print("Do you want to play again❓ (yes/no)", terminator: " ")
+        if let response = readLine()?.lowercased() {
+            if response == "yes" || response == "y" {
+                playAgain = true
+                break
+            } else if response == "no" || response == "n" {
+                playAgain = false
+                break
+            } else {
+                print("")
+                print("Invalid response. Please choose yes or no.")
+            }
+        }
+    }
+```
+The player is prompted to type `yes` or `no`. 
+
+If the player types `yes` or `y` then our `playAgain` `variable` will remain `true` and restart our game. If the player types `no` or `n` our `playAgain` `variable` will be `false` and the game will end.
+
+If the user types anything other than `yes` `y` or `no` `n` then an `error` message will `print` saying our response is `invalid` and to please choose and acceptable response.
+
+# Ending the game
+
+If the player decides not to play again then we will print  a custom message
+
+```swift
+print("")
+print("Thanks for playing❗️ Goodbye‼️✌️😘")
+```
+
+In this activity we got to use `variables`, `loops`, `conditionals`, and `functions` to create an interactive command line game!
