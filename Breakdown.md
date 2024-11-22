@@ -4,4 +4,4 @@
 var playAgain = true
 ```
 
-this is my `code`
+While this variable is  `true` our game will loop
