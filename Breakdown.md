@@ -128,6 +128,31 @@ If the guess is in range then we will compare it against our `targetNumber`. If 
 
 If the guess is correct, it will congratulate the player and `print` how many attempts it took them to guess the correct number before ending the game.
 
+Note: I want to direct your attention to this specific part of the code:
+```swift
+if guess < targetNumber {
+            print("")
+            if attempts >= 4 {
+                print(tooLowResponses.randomElement()!)
+            } else {
+                print("Too low‼️ Guess Higher❗️")
+                attempts += 1}
+        } else if guess > targetNumber {
+            print("")
+            if attempts >= 4 {
+                print(tooHighReponses.randomElement()!)
+            } else {
+                print("Too high‼️ Guess lower❗️")
+                attempts += 1}
+```
+
+This section of code checks if the player has made 4 or more incorrect guesses. If this is true then the program will print those funny messages we put in our `tooLowResponses` and `tooHighResponses` `arrays` earlier. The `.randomElement()` function will randomize the order the messages will be printed in keeping our game fun and random. The purpose of this is to add variety and keep the game entertaining.
+
+
+By using the  `!` `force unwrap` `operator` after the `.randomElement()` `function` we are telling swift that we are absolutely certain that the `optional` contains a value so go ahead and use it directly. 
+
+(This method of `optional unwrapping` is not recommended. We use it here because we put multiple `strings` in our `arrays` earlier in our process but if for example the `optional` happens to contain `nil`, maybe if we had an empty `array` or something, then the program would crash because it would have tried to `foce unwrap` a `nil` which is something that isnt there.)
+
 # Asking the Player if they want to Play Again
 
 After each game the program asks the player if they want to play again.
