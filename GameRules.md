@@ -1,6 +1,6 @@
 # What is Higher or Lower?
 
-The `Higher or Lower` game is a a simple number-guessing game where:
+The `Higher or Lower` game is a simple number-guessing game where:
 1. The computer picks a random number.
 2. The player guesses the number.
 3. The game provides feedback on whether the guess is too high or too low.
