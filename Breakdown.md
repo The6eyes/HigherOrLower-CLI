@@ -191,3 +191,10 @@ print("Thanks for playing❗️ Goodbye‼️✌️😘")
 ```
 
 In this activity we got to use `variables`, `loops`, `conditionals`, and `functions` to create an interactive command line game!
+
+
+#### Test
+
+*Fahim*
+
+**Fahim**
