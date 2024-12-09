@@ -5,6 +5,8 @@
 //  Created by Fred Saffold on 11/13/24.
 //
 
+//Just a test to see if things work
+
 import Foundation
 
 var playAgain = true // while this variable is true our game will loop
@@ -108,3 +110,4 @@ print("Thanks for playing❗️ Goodbye‼️✌️😘")
 3. 2 players option
 4. array or responses -- taunt messages
  */
+
