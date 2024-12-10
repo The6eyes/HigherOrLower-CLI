@@ -9,35 +9,66 @@
 
 import Foundation
 
-var playAgain = true // while this variable is true our game will loop
+var playAgain = true
 
 while playAgain   {
     
-    //First we have to make a few variables to establish our range and target number that our user will be guessing
+    var isSharinganMode = false
     
-    let minimumNumber = 1 // we want our minumum number to always be one
-    let maximumNumber = Int.random(in: 10...40) // we want out maximum number to be anywhere between 10 and 40
+
     
-    let targetNumber = Int.random(in:minimumNumber...maximumNumber) // variable that generates our random number
+    let minimumNumber = 1
+    let maximumNumber = Int.random(in: 10...40)
     
-    var isGameOver = false // Variable to track if the game is over or not
-    var attempts = 0 // attempts counts how many guesses the user has made
+    let targetNumber = Int.random(in:minimumNumber...maximumNumber)
     
-    //If our user guesses more than 4 times our responses will pull from these arrays
+    var isGameOver = false
+    var attempts = 0
+    
+    
     let tooLowResponses = ["Ok buddy, you got this 🙃. Maybe guess higher❓", "Hey, if you were intersted in winning you might wanna guess a little higher. teehee 😇", "Thats too low bruv, you should guess higher❗️"]
     let tooHighReponses = ["Yowza ❗️🤯 Thats a high try❗️Go again but guess lower❗️", "Cowabunga❗️ 🏄‍♂️ Bring it down a little bit, would ya❓ Guess lower❗️", "Holy Smokes pal, thats a pretty high guess. Bring it down maybe❓Guess lower. "]
     
     
-    // Print welcome message and rules
+    
     print("")
     print("Welcome to the Higher ⬆️ or Lower ⬇️ game❗️")
     print("") // when we print an empty string we are adding a line..just to space things out
-    print("I have picked a number between \(minimumNumber) and \(maximumNumber).")
+    print("So the way the game works is I will choose a random number inside a range.")
     print("")// we can also use \n at the end of a string to add a line after that string
     print("Try to guess it and I'll tell you if your guess is too high, too low, or correct.")
+    print("")
     
-    // We need to start the game loop here
+    while true {
+        print("There are two game modes. Regular mode and Sharingan mode.")
+        print("")
+        print("In regular mode you have unlimited guesses. In sharingan mode you are limited to 7 guesses.")
+        print("")
+        print("Before we start, choose your mode: Type '1' for Regular Mode. Type '2' for Sharingan Mode")
+        print("")
+        
+        if let modeChoice = readLine() {
+            if modeChoice == "1" {
+                isSharinganMode = false
+                print("")
+                print("Regular Mode selected. You have unlimited guesses! Good luck!")
+                break
+            } else if modeChoice == "2" {
+                isSharinganMode = true
+                print("")
+                print("Sharingan Mode activated! You have only 7 guesses. Good luck.")
+                break
+            } else {
+                print("Please select a valid game mode.")
+            }
+        }
+    }
+    
+    
     while !isGameOver {
+        
+        print("I have picked a number between \(minimumNumber) and \(maximumNumber).")
+        
         print("Enter your guess here 🤔:", terminator: " " )
         
         if let userInput = readLine()   {
@@ -52,14 +83,14 @@ while playAgain   {
     }
     
     func checkGuess(_ guess: Int) {
-        //First we will check if the guess is out of range -- if it is out of range give correct range as a hint using (string interp)
+        
         if guess < minimumNumber || guess > maximumNumber {
             print("")
             print("Yikers❗️Your guess is out of range❗️ 😩")
             print("Hint: Make sure to guess a number betweeen \(minimumNumber) and \(maximumNumber).\n")
-            return //If our guess is out of range then it will return us to the start of our game loop prompting us to enter another guess
+            return
         }
-        // If our guess is in range then we check our guess against our target number
+        
         if guess < targetNumber {
             print("")
             if attempts >= 4 {
@@ -80,9 +111,14 @@ while playAgain   {
             print("You guessed in \(attempts) attempts.\n")
             isGameOver = true
         }
+        
+        if isSharinganMode && attempts >= 7 {
+            print("You used all of your guesses. The number was \(targetNumber). I knew you didnt have a sharingan")
+            isGameOver = true
+            return
+        }
     }
     
-   // Play again response loop-- we have to account for any responses other than yes/y or no/n
     while true {
         print("")
         print("Do you want to play again❓ (yes/no)", terminator: " ")
@@ -102,12 +138,4 @@ while playAgain   {
 }
 print("")
 print("Thanks for playing❗️ Goodbye‼️✌️😘")
-/*
- RESEARCH SECTION
-1. limit to a certain amount of  guesses -- new game mode
-
-2. Computer AI --  Everytime we guess the computer guesses and whoever guesses first wins.
-3. 2 players option
-4. array or responses -- taunt messages
- */
 
